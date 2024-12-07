@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Gráficos</title>
+    <style>
+        /* General */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        h1, h2 {
+            font-family: 'Source Sans Pro', sans-serif;
+            color: #444;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            padding: 20px;
+            background-color: #007bff;
+            color: white;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            margin-top: 20px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+        }
+
+        p {
+            font-size: 1.1em;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        /* Container for each section */
+        section {
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            width: 60%;
+        }
+
+        .description {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.8;
+            text-align: start;
+        }
+
+        /* Specific to Tableau graphics */
+        .tableauPlaceholder {
+            height: 60vh;
+            width: 600px;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Vega-Lite visuals */
+        #vis1, #vis2, #vis3 {
+            margin: auto;
+            width: 80%;
+            height: auto;
+        }
+
+        /* Buttons or interactive elements */
+        button {
+            display: inline-block;
+            padding: 10px 15px;
+            font-size: 1em;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Links */
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            section {
+                padding: 15px;
+            }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.20.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
+</head>
+<body>
+
+<h1>Entrega Final</h1>
+<p>Este dashboard presenta varios análisis de datos de alojamientos en Denver, Estados Unidos.</p>
+
+<!-- Gráfico 1: Alojamiento en Mapa -->
+<section>
+    <h2>Análisis Geográfico</h2>
+    <p class="description">
+        El gráfico geográfico muestra la ubicación geográfica de cada propiedad en función de su latitud y longitud.
+        Cada punto está coloreado según el tipo de habitación (<i>room_type</i>) y su tamaño depende de la cantidad de <i>reviews</i> que haya tenido por lo que cuanto más cantidad de reviews mayor va a ser su tamaño, lo que permite identificar la distribución geográfica de las distintas categorías de alojamiento.
+        Al pasar el cursor sobre los puntos, se muestran detalles adicionales como el precio promedio, el puntaje promedio de valor y algunas métricas como el promedio del puntaje de limpieza.
+    </p>
+    <p class="description">
+        El gráfico de frecuencias presenta la cantidad de propiedades disponibles para cada tipo de habitación (<i>room_type</i>).
+        Se utiliza un gráfico de barras para resaltar qué tipos de habitaciones son más comunes en la base de datos.
+    </p>
+    <div class='tableauPlaceholder' id='viz1733571189891' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;2g&#47;2graficos&#47;AlojamientoenMapa&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='2graficos&#47;AlojamientoenMapa' /><param name='tabs' value='yes' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;2g&#47;2graficos&#47;AlojamientoenMapa&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1733571189891');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+</section>
+
+<section>
+    <h2>Puntuación y precio promedio por barrio</h2>
+    <p class="description">
+        Este gráfico muestra el precio promedio y la puntuación promedio de las propiedades en función de su barrio (<i>neighbourhood</i>).
+        Se utiliza un gráfico geográfico para visualizar la relación entre estas dos variables y se colorea cada punto según el tipo de habitación (<i>room_type</i>).
+        Al pasar el cursor sobre los puntos, se muestran detalles adicionales como el precio promedio, el puntaje promedio de valor y algunas métricas como el promedio del puntaje de limpieza.
+    </p>
+    <div class='tableauPlaceholder' id='viz1733572466310' style='position: relative'><noscript><a href='#'><img alt='Hoja 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;6G&#47;6GRMPTX7H&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='path' value='shared&#47;6GRMPTX7H' /> <param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;6G&#47;6GRMPTX7H&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1733572466310');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+</section>
+
+<!-- Contenedor para gráficos adicionales -->
+<section>
+    <h2>Promedio de puntuaciones por tipo de habitación</h2>
+    <p class="description">
+        Este gráfico ilustra el promedio de puntaje de las propiedades en función de su tipo de habitación (<i>room_type</i>).
+        El puntaje representa una medida de la calidad del alojamiento según las calificaciones dadas por los huéspedes.
+    </p>
+    <div id="vis2"/>
+    <script>
+        const spec2 = {
+            "config": {
+                "view": {"continuousWidth": 300, "continuousHeight": 300},
+                "axis": {
+                    "labelFont": "Source Sans Pro",
+                    "labelFontSize": 12,
+                    "titleFont": "Source Sans Pro",
+                    "titleFontSize": 14
+                },
+                "title": {"font": "Source Sans Pro", "fontSize": 18}
+            },
+            "layer": [
+                {
+                    "mark": {"type": "bar", "cornerRadius": 5},
+                    "encoding": {
+                        "tooltip": [
+                            {
+                                "field": "room_type",
+                                "title": "Tipo de Habitación",
+                                "type": "nominal"
+                            },
+                            {
+                                "field": "review_scores_rating",
+                                "format": ".2f",
+                                "title": "Puntuación Promedio",
+                                "type": "quantitative"
+                            }
+                        ],
+                        "x": {
+                            "field": "review_scores_rating",
+                            "title": "Puntuación promedio",
+                            "type": "quantitative"
+                        },
+                        "y": {
+                            "field": "room_type",
+                            "sort": "-x",
+                            "title": "Tipo de habitación",
+                            "type": "nominal"
+                        }
+                    }
+                },
+                {
+                    "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 3},
+                    "encoding": {
+                        "text": {
+                            "field": "review_scores_rating",
+                            "format": ".2f",
+                            "type": "quantitative"
+                        },
+                        "tooltip": [
+                            {
+                                "field": "room_type",
+                                "title": "Tipo de Habitación",
+                                "type": "nominal"
+                            },
+                            {
+                                "field": "review_scores_rating",
+                                "format": ".2f",
+                                "title": "Puntuación Promedio",
+                                "type": "quantitative"
+                            }
+                        ],
+                        "x": {
+                            "field": "review_scores_rating",
+                            "title": "Puntuación promedio",
+                            "type": "quantitative"
+                        },
+                        "y": {
+                            "field": "room_type",
+                            "sort": "-x",
+                            "title": "Tipo de habitación",
+                            "type": "nominal"
+                        }
+                    }
+                }
+            ],
+            "data": {"name": "data-15f939089c2005778b42f2dc73b19b4a"},
+            "height": 400,
+            "width": 600,
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json",
+            "datasets": {
+                "data-15f939089c2005778b42f2dc73b19b4a": [
+                    {
+                        "room_type": "Entire home/apt",
+                        "review_scores_rating": 4.8734646918804545
+                    },
+                    {"room_type": "Hotel room", "review_scores_rating": 4.398181818181818},
+                    {"room_type": "Private room", "review_scores_rating": 4.83273851590106},
+                    {"room_type": "Shared room", "review_scores_rating": 4.663142857142858}
+                ]
+            }
+        };
+        vegaEmbed("#vis2", spec2, {mode: "vega-lite"}).then(console.log).catch(console.warn);
+    </script>
+</section>
+
+<!-- Contenedor para gráficos adicionales -->
+<section>
+    <h2>Promedio de comodidades por tipo de habitación</h2>
+    <p class="description">
+        Este gráfico muestra el promedio de comodidades principales (cantidad de baños, dormitorios y camas) por cada tipo de habitación (<i>room_type</i>).
+        Permite identificar si ciertos tipos de habitación ofrecen más comodidades en promedio que otros.
+    </p>
+    <div id="vis1"/>
+    <script>
+        const spec1 = {
+            "config": {
+                "view": {
+                    "continuousWidth": 300,
+                    "continuousHeight": 300,
+                    "stroke": "transparent",
+                    "strokeWidth": 1
+                },
+                "axis": {
+                    "labelFont": "Source Sans Pro",
+                    "labelFontSize": 12,
+                    "titleFont": "Source Sans Pro",
+                    "titleFontSize": 14
+                },
+                "title": {"font": "Source Sans Pro", "fontSize": 18}
+            },
+            "data": {"name": "data-9408b2f04fa8bf3e5eab0ef3688ffcf0"},
+            "mark": {"type": "bar", "cornerRadius": 3},
+            "encoding": {
+                "color": {"field": "Variable", "title": "Comodidades", "type": "nominal"},
+                "tooltip": [
+                    {"field": "room_type", "title": "Tipo de Habitación", "type": "nominal"},
+                    {"field": "Variable", "title": "Comodidad", "type": "nominal"},
+                    {
+                        "field": "Valor",
+                        "format": ".2f",
+                        "title": "Promedio",
+                        "type": "quantitative"
+                    }
+                ],
+                "x": {"field": "Valor", "title": "Promedio", "type": "quantitative"},
+                "y": {
+                    "field": "room_type",
+                    "sort": "-x",
+                    "title": "Tipo de habitación",
+                    "type": "nominal"
+                }
+            },
+            "height": 400,
+            "transform": [
+                {"fold": ["bathrooms", "bedrooms", "beds"], "as": ["Variable", "Valor"]}
+            ],
+            "width": 546,
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json",
+            "datasets": {
+                "data-9408b2f04fa8bf3e5eab0ef3688ffcf0": [
+                    {
+                        "room_type": "Entire home/apt",
+                        "bathrooms": 1.557648831951771,
+                        "bedrooms": 1.890138205668775,
+                        "beds": 2.2763819095477387
+                    },
+                    {
+                        "room_type": "Hotel room",
+                        "bathrooms": 1.8181818181818181,
+                        "bedrooms": 1,
+                        "beds": 1.9090909090909092
+                    },
+                    {
+                        "room_type": "Private room",
+                        "bathrooms": 1.1507064364207222,
+                        "bedrooms": 1.089922480620155,
+                        "beds": 1.2120253164556962
+                    },
+                    {
+                        "room_type": "Shared room",
+                        "bathrooms": 2.0135135135135136,
+                        "bedrooms": 1.0277777777777777,
+                        "beds": 3.27027027027027
+                    }
+                ]
+            }
+        };
+        vegaEmbed("#vis1", spec1, {mode: "vega-lite"}).then(console.log).catch(console.warn);
+    </script>
+</section>
+
+<section>
+    <h2>Top 20 comodidades extras más comunes</h2>
+    <p class="description">
+        Este gráfico muestra las comodidades extras más comunes ofrecidas por las propiedades, desglosadas por tipo de habitación (<i>room_type</i>).
+        Se utiliza un gráfico interactivo para identificar las comodidades más frecuentes en cada categoría de habitación.
+    </p>
+    <div id="vis3"/>
+    <script>
+        const spec3 = {
+            "config": {
+                "view": {
+                    "continuousWidth": 300,
+                    "continuousHeight": 300,
+                    "stroke": "transparent",
+                    "strokeWidth": 1
+                },
+                "axis": {
+                    "labelFont": "Source Sans Pro",
+                    "labelFontSize": 12,
+                    "titleFont": "Source Sans Pro",
+                    "titleFontSize": 14
+                },
+                "title": {"font": "Source Sans Pro", "fontSize": 16}
+            },
+            "data": {"name": "data-2512729ba7139bb1f48845d990f487e9"},
+            "mark": {"type": "bar", "cornerRadius": 3},
+            "encoding": {
+                "color": {
+                    "field": "room_type",
+                    "title": "Tipo de Habitación",
+                    "type": "nominal"
+                },
+                "tooltip": [
+                    {"field": "room_type", "title": "Tipo de Habitación", "type": "nominal"},
+                    {"field": "amenity", "title": "Comodidad", "type": "nominal"},
+                    {"field": "count", "title": "Frecuencia", "type": "quantitative"}
+                ],
+                "x": {"field": "count", "title": "Frecuencia", "type": "quantitative"},
+                "y": {
+                    "field": "amenity",
+                    "sort": "-x",
+                    "title": "Comodidades",
+                    "type": "nominal"
+                }
+            },
+            "height": 500,
+            "params": [
+                {
+                    "name": "Filtrar Room Type",
+                    "select": {"type": "point", "fields": ["room_type"]},
+                    "bind": "legend"
+                }
+            ],
+            "transform": [{"filter": {"param": "Filtrar Room Type"}}],
+            "width": 450,
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json",
+            "datasets": {
+                "data-2512729ba7139bb1f48845d990f487e9": [
+                    {"room_type": "Entire home/apt", "amenity": "Smoke alarm", "count": 4227},
+                    {
+                        "room_type": "Entire home/apt",
+                        "amenity": "Carbon monoxide alarm",
+                        "count": 4016
+                    },
+                    {"room_type": "Entire home/apt", "amenity": "Kitchen", "count": 3983},
+                    {
+                        "room_type": "Entire home/apt",
+                        "amenity": "Dishes and silverware",
+                        "count": 3787
+                    },
+                    {"room_type": "Entire home/apt", "amenity": "Hot water", "count": 3760},
+                    {"room_type": "Entire home/apt", "amenity": "Essentials", "count": 3758},
+                    {
+                        "room_type": "Entire home/apt",
+                        "amenity": "Fire extinguisher",
+                        "count": 3723
+                    },
+                    {"room_type": "Entire home/apt", "amenity": "Hangers", "count": 3634},
+                    {"room_type": "Entire home/apt", "amenity": "Wifi", "count": 3584},
+                    {
+                        "room_type": "Entire home/apt",
+                        "amenity": "Cooking basics",
+                        "count": 3562
+                    },
+                    {"room_type": "Entire home/apt", "amenity": "Microwave", "count": 3560},
+                    {
+                        "room_type": "Entire home/apt",
+                        "amenity": "Self check-in",
+                        "count": 3541
+                    },
+                    {"room_type": "Entire home/apt", "amenity": "Bed linens", "count": 3489},
+                    {"room_type": "Entire home/apt", "amenity": "Hair dryer", "count": 3412},
+                    {
+                        "room_type": "Entire home/apt",
+                        "amenity": "Refrigerator",
+                        "count": 3324
+                    },
+                    {"room_type": "Entire home/apt", "amenity": "Iron", "count": 3218},
+                    {
+                        "room_type": "Entire home/apt",
+                        "amenity": "Dedicated workspace",
+                        "count": 3027
+                    },
+                    {"room_type": "Entire home/apt", "amenity": "Dishwasher", "count": 2913},
+                    {"room_type": "Entire home/apt", "amenity": "Shampoo", "count": 2906},
+                    {
+                        "room_type": "Entire home/apt",
+                        "amenity": "Free street parking",
+                        "count": 2897
+                    },
+                    {
+                        "room_type": "Hotel room",
+                        "amenity": "Carbon monoxide alarm",
+                        "count": 22
+                    },
+                    {"room_type": "Hotel room", "amenity": "Coffee maker", "count": 22},
+                    {"room_type": "Hotel room", "amenity": "Essentials", "count": 22},
+                    {"room_type": "Hotel room", "amenity": "Heating", "count": 22},
+                    {"room_type": "Hotel room", "amenity": "Hot water", "count": 22},
+                    {"room_type": "Hotel room", "amenity": "Iron", "count": 22},
+                    {"room_type": "Hotel room", "amenity": "Microwave", "count": 22},
+                    {"room_type": "Hotel room", "amenity": "Refrigerator", "count": 22},
+                    {"room_type": "Hotel room", "amenity": "Smoke alarm", "count": 22},
+                    {"room_type": "Hotel room", "amenity": "Wifi", "count": 22},
+                    {
+                        "room_type": "Hotel room",
+                        "amenity": "Dedicated workspace",
+                        "count": 21
+                    },
+                    {"room_type": "Hotel room", "amenity": "First aid kit", "count": 21},
+                    {"room_type": "Hotel room", "amenity": "Bed linens", "count": 20},
+                    {"room_type": "Hotel room", "amenity": "Building staff", "count": 20},
+                    {"room_type": "Hotel room", "amenity": "Fire extinguisher", "count": 20},
+                    {"room_type": "Hotel room", "amenity": "Self check-in", "count": 20},
+                    {"room_type": "Hotel room", "amenity": "Shampoo", "count": 20},
+                    {
+                        "room_type": "Hotel room",
+                        "amenity": "Extra pillows and blankets",
+                        "count": 19
+                    },
+                    {"room_type": "Hotel room", "amenity": "Air conditioning", "count": 18},
+                    {"room_type": "Hotel room", "amenity": "Hangers", "count": 17},
+                    {"room_type": "Private room", "amenity": "Smoke alarm", "count": 664},
+                    {
+                        "room_type": "Private room",
+                        "amenity": "Carbon monoxide alarm",
+                        "count": 620
+                    },
+                    {"room_type": "Private room", "amenity": "Essentials", "count": 566},
+                    {"room_type": "Private room", "amenity": "Wifi", "count": 561},
+                    {"room_type": "Private room", "amenity": "Hot water", "count": 550},
+                    {
+                        "room_type": "Private room",
+                        "amenity": "Fire extinguisher",
+                        "count": 531
+                    },
+                    {"room_type": "Private room", "amenity": "Hangers", "count": 529},
+                    {"room_type": "Private room", "amenity": "Kitchen", "count": 500},
+                    {"room_type": "Private room", "amenity": "Bed linens", "count": 480},
+                    {
+                        "room_type": "Private room",
+                        "amenity": "Dedicated workspace",
+                        "count": 473
+                    },
+                    {"room_type": "Private room", "amenity": "Iron", "count": 470},
+                    {
+                        "room_type": "Private room",
+                        "amenity": "Dishes and silverware",
+                        "count": 467
+                    },
+                    {"room_type": "Private room", "amenity": "Hair dryer", "count": 462},
+                    {"room_type": "Private room", "amenity": "Microwave", "count": 456},
+                    {
+                        "room_type": "Private room",
+                        "amenity": "Free street parking",
+                        "count": 449
+                    },
+                    {"room_type": "Private room", "amenity": "Self check-in", "count": 448},
+                    {"room_type": "Private room", "amenity": "First aid kit", "count": 446},
+                    {"room_type": "Private room", "amenity": "Refrigerator", "count": 446},
+                    {"room_type": "Private room", "amenity": "Shampoo", "count": 428},
+                    {
+                        "room_type": "Private room",
+                        "amenity": "Free parking on premises",
+                        "count": 412
+                    },
+                    {"room_type": "Shared room", "amenity": "Hot water", "count": 36},
+                    {"room_type": "Shared room", "amenity": "Smoke alarm", "count": 36},
+                    {"room_type": "Shared room", "amenity": "Wifi", "count": 36},
+                    {
+                        "room_type": "Shared room",
+                        "amenity": "Carbon monoxide alarm",
+                        "count": 35
+                    },
+                    {"room_type": "Shared room", "amenity": "Essentials", "count": 35},
+                    {"room_type": "Shared room", "amenity": "Fire extinguisher", "count": 33},
+                    {"room_type": "Shared room", "amenity": "Heating", "count": 32},
+                    {
+                        "room_type": "Shared room",
+                        "amenity": "Dishes and silverware",
+                        "count": 31
+                    },
+                    {"room_type": "Shared room", "amenity": "Microwave", "count": 31},
+                    {"room_type": "Shared room", "amenity": "Kitchen", "count": 30},
+                    {"room_type": "Shared room", "amenity": "Self check-in", "count": 30},
+                    {
+                        "room_type": "Shared room",
+                        "amenity": "Exterior security cameras on property",
+                        "count": 26
+                    },
+                    {
+                        "room_type": "Shared room",
+                        "amenity": "Free parking on premises",
+                        "count": 25
+                    },
+                    {"room_type": "Shared room", "amenity": "Refrigerator", "count": 25},
+                    {"room_type": "Shared room", "amenity": "Cooking basics", "count": 23},
+                    {"room_type": "Shared room", "amenity": "Coffee maker", "count": 22},
+                    {"room_type": "Shared room", "amenity": "First aid kit", "count": 22},
+                    {"room_type": "Shared room", "amenity": "Oven", "count": 22},
+                    {"room_type": "Shared room", "amenity": "Iron", "count": 21},
+                    {"room_type": "Shared room", "amenity": "Bed linens", "count": 20}
+                ]
+            }
+        };
+        vegaEmbed("#vis3", spec3, {mode: "vega-lite"}).then(console.log).catch(console.warn);
+    </script>
+</section>
+
+</body>
+</html>
